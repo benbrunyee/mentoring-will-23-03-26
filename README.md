@@ -1,0 +1,46 @@
+# Python Beginner Scripts
+
+A collection of beginner-friendly Python scripts for GCSE Computer Science students.
+Each script focuses on a core concept and is heavily commented to explain what's happening and why.
+
+## Setup
+
+Make sure you have Python 3 installed. You can check by running:
+
+```bash
+python3 --version
+```
+
+Install the one external dependency (only needed for the API script):
+
+```bash
+pip install -r requirements.txt
+```
+
+## Scripts
+
+| File | Topic | Concepts Covered |
+|------|-------|-----------------|
+| `01_number_guesser.py` | Game | `random`, `while` loops, `if/elif/else`, input validation |
+| `02_quiz_game.py` | Quiz | Lists, dictionaries, `for` loops, functions, score tracking |
+| `03_password_generator.py` | Strings | `string` module, `random`, list comprehensions, `join` |
+| `04_file_creator.py` | File I/O | `os`, `random`, writing files with `open()` |
+| `05_file_searcher.py` | File I/O | Reading files, string searching, looping over directories |
+| `06_todo_app.py` | Terminal App | CRUD operations, `json` persistence, menus, functions |
+| `07_api_requests.py` | Networking | HTTP requests, JSON parsing, `requests` library |
+| `08_web_server.py` | Web | Built-in `http.server`, how HTTP works |
+| `09_gui_calculator.py` | GUI | `tkinter`, event-driven programming, widgets |
+
+## Running a Script
+
+From the `scripts/` folder:
+
+```bash
+python3 01_number_guesser.py
+```
+
+## Notes
+
+- Scripts `04` and `05` work together — run `04` first to create the files, then `05` to search them.
+- Script `08` starts a web server. Open `http://localhost:8080` in your browser while it's running, then press `Ctrl+C` to stop it.
+- Script `09` opens a window — make sure you're not running it over SSH without a display.

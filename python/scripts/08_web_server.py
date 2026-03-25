@@ -12,7 +12,7 @@
 
 import http.server
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 PORT = 8080
 
@@ -96,18 +96,18 @@ class RequestHandler(http.server.BaseHTTPRequestHandler):
 
     def do_GET(self):
         """This method is called automatically for every incoming GET request."""
-        if self.path == "/":
-            self.send_html(HTML_PAGE)
+        now = datetime.now(timezone.utc)
 
-        elif self.path == "/about":
-            self.send_html(ABOUT_PAGE)
-
-        elif self.path == "/time":
-            self.send_json({"time": datetime.now().strftime("%H:%M:%S"),
-                            "date": datetime.now().strftime("%A %d %B %Y")})
-
-        else:
-            self.send_not_found()
+        match self.path:
+            case "/":
+                self.send_html(HTML_PAGE)
+            case "/about":
+                self.send_html(ABOUT_PAGE)
+            case "/time":
+                self.send_json({"time": now.strftime("%H:%M:%S UTC"),
+                                "date": now.strftime("%A %d %B %Y")})
+            case _:
+                self.send_not_found()
 
     # ------------------------------------------------------------------
     # Helper methods for sending different types of responses
@@ -156,7 +156,7 @@ def main():
     print("Press Ctrl+C to stop.\n")
 
     # TCPServer creates a socket that listens for incoming connections
-    with http.server.TCPServer(("", PORT), RequestHandler) as server:
+    with http.server.HTTPServer(("", PORT), RequestHandler) as server:
         try:
             # serve_forever() keeps the server running until we stop it
             server.serve_forever()
